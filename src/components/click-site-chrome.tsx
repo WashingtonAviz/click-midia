@@ -51,11 +51,7 @@ export function ClickHeader({ onLead, sectionBase = "", label = "CLICK MÍDIA" }
 
   return (
     <header className="media-header shell">
-      <Link
-        className="brand-lockup"
-        to="/click-midia"
-        aria-label="Click Parts - página Click Mídia"
-      >
+      <Link className="brand-lockup" to="/" aria-label="Click Parts - página Click Mídia">
         <img src={clickpartsLogo.url} alt="Click Parts" />
         <b>{label === "CLICK MÍDIA" ? "CLICK" : "CLICK PARTS"}</b>
         {label === "CLICK MÍDIA" ? " MÍDIA" : " BRASIL"}
@@ -142,7 +138,7 @@ export function ClickFooter() {
     <footer className="media-footer">
       <div className="shell footer-grid">
         <div className="footer-brand">
-          <Link className="brand-lockup" to="/click-midia">
+          <Link className="brand-lockup" to="/">
             <img src={clickpartsLogo.url} alt="Click Parts" />
             <b>Click Mídia</b>
           </Link>
@@ -273,7 +269,7 @@ export function LeadDialog({
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const openedAt = useRef(Date.now());
-  const step = LEAD_STEPS[stepIndex];
+  const step = LEAD_STEPS[stepIndex]!;
   const progress = Math.round(((stepIndex + 1) / LEAD_STEPS.length) * 100);
   const currentPlanName = useMemo(() => planName(form.intencaoPlano), [form.intencaoPlano]);
 

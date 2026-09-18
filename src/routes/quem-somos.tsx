@@ -67,8 +67,13 @@ export const Route = createFileRoute("/quem-somos")({
           "Um ecossistema tecnológico criado para conectar todos os elos do aftermarket automotivo.",
       },
       { property: "og:type", content: "website" },
+      {
+        property: "og:url",
+        content: "https://clickpartsbrasil.com/click-midia/quem-somos",
+      },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://clickpartsbrasil.com/click-midia/quem-somos" }],
   }),
   component: AboutPage,
 });
@@ -769,7 +774,7 @@ function AboutClosing() {
         <a className="primary-cta" href="#ecossistema">
           Conheça o ecossistema <ArrowDown />
         </a>
-        <Link className="text-cta" to="/click-midia">
+        <Link className="text-cta" to="/">
           Anuncie no Click Mídia <ArrowRight />
         </Link>
       </div>

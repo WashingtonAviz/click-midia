@@ -7,15 +7,24 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+  vite: {
+    // EasyPanel forwards the complete /click-midia path to this service.
+    base: "/click-midia",
+  },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
     // The Click Mídia lead is sent directly to the existing Click Parts Cloud Function.
-    router: { routeFileIgnorePattern: "api\\.click-midia-lead\\.ts$" },
+    router: {
+      basepath: "/click-midia",
+      routeFileIgnorePattern: "api\\.click-midia-lead\\.ts$",
+    },
     // EasyPanel serves this landing page as a static SPA through Nginx.
     spa: {
       enabled: true,
+      // The router basepath turns this root route into /click-midia publicly.
+      maskPath: "/",
       prerender: { outputPath: "/index.html" },
     },
   },

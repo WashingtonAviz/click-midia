@@ -1,7 +1,11 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+
+import { ClickMidiaPage } from "./click-midia";
 
 export const Route = createFileRoute("/")({
-  beforeLoad: () => {
-    throw redirect({ to: "/click-midia" });
-  },
+  head: () => ({
+    meta: [{ property: "og:url", content: "https://clickpartsbrasil.com/click-midia" }],
+    links: [{ rel: "canonical", href: "https://clickpartsbrasil.com/click-midia" }],
+  }),
+  component: ClickMidiaPage,
 });

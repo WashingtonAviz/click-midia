@@ -59,8 +59,10 @@ export const Route = createFileRoute("/click-midia")({
         content: "Sua marca presente no momento da decisão de compra no ecossistema Click Parts.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://clickpartsbrasil.com/click-midia" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "https://clickpartsbrasil.com/click-midia" }],
   }),
   component: ClickMidiaPage,
 });
@@ -122,7 +124,7 @@ const offerProducts = [
   },
 ];
 
-function ClickMidiaPage() {
+export function ClickMidiaPage() {
   const [lead, setLead] = useState<{ open: boolean; source: string; plan: ClickMidiaPlan }>({
     open: false,
     source: "site",
