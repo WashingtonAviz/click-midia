@@ -13,5 +13,10 @@ export default defineConfig({
     server: { entry: "server" },
     // The Click Mídia lead is sent directly to the existing Click Parts Cloud Function.
     router: { routeFileIgnorePattern: "api\\.click-midia-lead\\.ts$" },
+    // EasyPanel serves this landing page as a static SPA through Nginx.
+    spa: {
+      enabled: true,
+      prerender: { outputPath: "/index.html" },
+    },
   },
 });
