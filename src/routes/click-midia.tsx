@@ -21,6 +21,7 @@ import {
   LeadDialog,
   WhatsAppFloat,
 } from "@/components/click-site-chrome";
+import { assetUrl } from "@/lib/asset-url";
 import type { ClickMidiaPlan } from "@/services/click-midia-lead";
 
 import banner12x from "../assets/banner-12x.webp.asset.json";
@@ -68,12 +69,12 @@ export const Route = createFileRoute("/click-midia")({
 });
 
 const brands = [
-  { name: "Bosch", src: bosch.url },
-  { name: "Cofap", src: cofap.url },
-  { name: "Nakata", src: nakata.url },
-  { name: "Fremax", src: fremax.url },
-  { name: "SKF", src: skf.url },
-  { name: "NGK", src: ngk.url },
+  { name: "Bosch", src: assetUrl(bosch) },
+  { name: "Cofap", src: assetUrl(cofap) },
+  { name: "Nakata", src: assetUrl(nakata) },
+  { name: "Fremax", src: assetUrl(fremax) },
+  { name: "SKF", src: assetUrl(skf) },
+  { name: "NGK", src: assetUrl(ngk) },
 ];
 
 const products = [
@@ -82,21 +83,21 @@ const products = [
     name: "Vela NGK alta performance",
     price: "R$ 29,90",
     stock: "12 disponíveis",
-    src: vela.url,
+    src: assetUrl(vela),
   },
   {
     tag: "INJEÇÃO",
     name: "Sensor de oxigênio",
     price: "R$ 189,90",
     stock: "7 disponíveis",
-    src: sensor.url,
+    src: assetUrl(sensor),
   },
   {
     tag: "TRANSMISSÃO",
     name: "Kit de embreagem completo",
     price: "R$ 649,90",
     stock: "4 disponíveis",
-    src: embreagem.url,
+    src: assetUrl(embreagem),
   },
 ];
 
@@ -106,21 +107,21 @@ const offerProducts = [
     name: "Correia dentada",
     price: "R$ 84,90",
     stock: "19 disponíveis",
-    src: correia.url,
+    src: assetUrl(correia),
   },
   {
     tag: "ELÉTRICA",
     name: "Bateria automotiva 60Ah",
     price: "R$ 459,90",
     stock: "8 disponíveis",
-    src: bateria.url,
+    src: assetUrl(bateria),
   },
   {
     tag: "INJEÇÃO",
     name: "Bomba de combustível",
     price: "R$ 219,90",
     stock: "6 disponíveis",
-    src: bomba.url,
+    src: assetUrl(bomba),
   },
 ];
 
@@ -195,7 +196,7 @@ function Hero({ onLead }: { onLead: (source?: string, plan?: ClickMidiaPlan) => 
       </div>
       <figure className="hero-offers-image">
         <img
-          src={offersScreen.url}
+          src={assetUrl(offersScreen)}
           alt="Tela de ofertas do marketplace Click Parts: banner de autopeças em até 12x sem juros, marcas disponíveis e destaque de produtos, em desktop e celular"
           loading="eager"
         />
@@ -365,7 +366,7 @@ function BrazilMap() {
       aria-label="Mapa do Brasil com concentração de intenção de compra"
     >
       <img
-        src={brazilMapImg.url}
+        src={assetUrl(brazilMapImg)}
         alt="Mapa do Brasil — Inteligência geográfica: onde a intenção acontece. Maior concentração em vermelho e intenção identificada em amarelo, concentradas no Sudeste e Sul. A Click sabe onde a intenção de compra está acontecendo."
         loading="lazy"
       />
@@ -484,7 +485,7 @@ function MarketplaceMockup({ variant }: { variant: "hero" | "compact" }) {
     <div className={`marketplace-mockup marketplace-mockup--${variant}`}>
       <BrowserFrame label="Marketplace">
         <div className="market-search">
-          <img src={clickpartsLogo.url} alt="" />
+          <img src={assetUrl(clickpartsLogo)} alt="" />
           <span>
             <MapPin /> Digite seu CEP
           </span>
@@ -494,7 +495,7 @@ function MarketplaceMockup({ variant }: { variant: "hero" | "compact" }) {
           <ShoppingCart />
           <User />
         </div>
-        <div className="market-banner" style={{ backgroundImage: `url(${banner12x.url})` }}>
+        <div className="market-banner" style={{ backgroundImage: `url(${assetUrl(banner12x)})` }}>
           <small>FACILIDADE DE PAGAMENTO</small>
           <b>
             Autopeças em até
@@ -506,15 +507,15 @@ function MarketplaceMockup({ variant }: { variant: "hero" | "compact" }) {
         <BrandStrip compact />
         <div className="feature-grid">
           <figure>
-            <img src={cofapFeature.url} alt="Suspensão para todos os caminhos" />
+            <img src={assetUrl(cofapFeature)} alt="Suspensão para todos os caminhos" />
             <b>COFAP</b>
           </figure>
           <figure>
-            <img src={nakataFeature.url} alt="Confiança em cada movimento" />
+            <img src={assetUrl(nakataFeature)} alt="Confiança em cada movimento" />
             <b>NAKATA</b>
           </figure>
           <figure>
-            <img src={mobilFeature.url} alt="Proteção que leva mais longe" />
+            <img src={assetUrl(mobilFeature)} alt="Proteção que leva mais longe" />
             <b>MOBIL</b>
           </figure>
         </div>
@@ -529,7 +530,7 @@ function WorkshopMockup() {
     <BrowserFrame label="Área do prestador">
       <div className="dashboard">
         <aside>
-          <img src={clickpartsLogo.url} alt="" />
+          <img src={assetUrl(clickpartsLogo)} alt="" />
           <b>Prestador</b>
           {[1, 2, 3, 4, 5].map((i) => (
             <i key={i} />

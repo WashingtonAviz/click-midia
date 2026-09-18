@@ -23,6 +23,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 
 import clickpartsLogo from "@/assets/clickparts-logo.png.asset.json";
 import { Button } from "@/components/ui/button";
+import { assetUrl } from "@/lib/asset-url";
 import {
   enviarLeadClickMidia,
   formatarCnpj,
@@ -52,7 +53,7 @@ export function ClickHeader({ onLead, sectionBase = "", label = "CLICK MÍDIA" }
   return (
     <header className="media-header shell">
       <Link className="brand-lockup" to="/" aria-label="Click Parts - página Click Mídia">
-        <img src={clickpartsLogo.url} alt="Click Parts" />
+        <img src={assetUrl(clickpartsLogo)} alt="Click Parts" />
         <b>{label === "CLICK MÍDIA" ? "CLICK" : "CLICK PARTS"}</b>
         {label === "CLICK MÍDIA" ? " MÍDIA" : " BRASIL"}
       </Link>
@@ -139,7 +140,7 @@ export function ClickFooter() {
       <div className="shell footer-grid">
         <div className="footer-brand">
           <Link className="brand-lockup" to="/">
-            <img src={clickpartsLogo.url} alt="Click Parts" />
+            <img src={assetUrl(clickpartsLogo)} alt="Click Parts" />
             <b>Click Mídia</b>
           </Link>
           <p>Retail media para o aftermarket automotivo.</p>

@@ -29,6 +29,7 @@ import {
   LeadDialog,
   WhatsAppFloat,
 } from "@/components/click-site-chrome";
+import { assetUrl } from "@/lib/asset-url";
 import type { ClickMidiaPlan } from "@/services/click-midia-lead";
 import { Button } from "@/components/ui/button";
 import marketplaceMockup from "@/assets/marketplace-mockup.png.asset.json";
@@ -248,7 +249,7 @@ function AboutHero() {
       </div>
       <figure className="about-hero-image">
         <img
-          src={marketplaceMockup.url}
+          src={assetUrl(marketplaceMockup)}
           alt="Tela do marketplace Click Parts: autopeças em até 12x sem juros, marcas disponíveis e destaque de produtos, em desktop e celular"
           loading="eager"
         />
@@ -468,70 +469,70 @@ function JourneyCard({ item, index }: { item: (typeof journey)[number]; index: n
         {item.scene === "arrival" ? (
           <img
             className="scene-photo"
-            src={journeyCustomerPhoto.url}
+            src={assetUrl(journeyCustomerPhoto)}
             alt="Cliente recebendo as chaves do veículo na oficina"
             loading="lazy"
           />
         ) : item.scene === "order" ? (
           <img
             className="scene-photo"
-            src={journeyWorkshopPhoto.url}
+            src={assetUrl(journeyWorkshopPhoto)}
             alt="Oficina usando o sistema Click Parts no balcão enquanto o cliente recebe no celular a notificação de Ordem de Serviço aberta"
             loading="lazy"
           />
         ) : item.scene === "search" ? (
           <img
             className="scene-photo"
-            src={journeySearchPhoto.url}
+            src={assetUrl(journeySearchPhoto)}
             alt="Oficina pesquisando pastilha de freio no sistema Click Parts, com resultados de fornecedores, preços e disponibilidade em estoque"
             loading="lazy"
           />
         ) : item.scene === "map" ? (
           <img
             className="scene-photo"
-            src={journeyGeolocationPhoto.url}
+            src={assetUrl(journeyGeolocationPhoto)}
             alt="Mapa de geolocalização do sistema Click Parts mostrando oficinas e autopeças próximas, com a pastilha de freio em estoque na Peçauto Autopeças a 1,0 km"
             loading="lazy"
           />
         ) : item.scene === "request" ? (
           <img
             className="scene-photo"
-            src={journeyPartsStorePhoto.url}
+            src={assetUrl(journeyPartsStorePhoto)}
             alt="Atendente de autopeça recebendo no sistema Click Parts a solicitação de pedido de peça, com status de preparação e transporte"
             loading="lazy"
           />
         ) : item.scene === "sale" ? (
           <img
             className="scene-photo"
-            src={journeySalePhoto.url}
+            src={assetUrl(journeySalePhoto)}
             alt="Venda confirmada no sistema Click Parts na autopeça, com pedido em preparação e motoboy recebendo no celular a nova coleta do filtro de cabine"
             loading="lazy"
           />
         ) : item.scene === "dispatch" ? (
           <img
             className="scene-photo"
-            src={journeyLogisticsPhoto.url}
+            src={assetUrl(journeyLogisticsPhoto)}
             alt="Motoboy Click Drive recebendo a caixa de pastilhas de freio Bosch no balcão da autopeça, com o sistema de vendas Click Parts ao lado"
             loading="lazy"
           />
         ) : item.scene === "pickup" ? (
           <img
             className="scene-photo"
-            src={journeyPickupPhoto.url}
+            src={assetUrl(journeyPickupPhoto)}
             alt="Motoboy Click Parts em rota de entrega, com o app exibindo a rota no celular e o entregador de costas com o baú Click Parts"
             loading="lazy"
           />
         ) : item.scene === "delivery" ? (
           <img
             className="scene-photo"
-            src={journeyDeliveryPhoto.url}
+            src={assetUrl(journeyDeliveryPhoto)}
             alt="Motoboy Click Parts entregando a caixa de pastilhas de freio Bosch ao mecânico na oficina, com o veículo no elevador ao fundo"
             loading="lazy"
           />
         ) : item.scene === "service" ? (
           <img
             className="scene-photo"
-            src={journeyServicePhoto.url}
+            src={assetUrl(journeyServicePhoto)}
             alt="Mecânico entregando as chaves do veículo ao cliente na oficina, com o serviço concluído"
             loading="lazy"
           />
@@ -657,7 +658,7 @@ function WholeEcosystem() {
               {ecosystemSolutions.map((solution, index) => (
                 <article className="ecosystem-solution" key={solution.title}>
                   <div className="ecosystem-solution-media">
-                    <img src={solution.image.url} alt={solution.alt} loading="lazy" />
+                    <img src={assetUrl(solution.image)} alt={solution.alt} loading="lazy" />
                   </div>
                   <div className="ecosystem-solution-copy">
                     <span>{String(index + 1).padStart(2, "0")}</span>
