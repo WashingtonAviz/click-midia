@@ -10,6 +10,9 @@ export default defineConfig({
   vite: {
     // EasyPanel forwards the complete /click-midia path to this service.
     base: "/click-midia",
+    build: {
+      target: "es2019",
+    },
   },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
@@ -20,12 +23,12 @@ export default defineConfig({
       basepath: "/click-midia",
       routeFileIgnorePattern: "api\\.click-midia-lead\\.ts$",
     },
-    // EasyPanel serves this landing page as a static SPA through Nginx.
-    spa: {
+    // Emit real page content in index.html so mobile users do not depend on
+    // JavaScript download and hydration for the first render.
+    pages: [{ path: "/" }],
+    prerender: {
       enabled: true,
-      // The router basepath turns this root route into /click-midia publicly.
-      maskPath: "/",
-      prerender: { outputPath: "/index.html" },
+      crawlLinks: false,
     },
   },
 });
