@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export type ClickMidiaPlan = "logo" | "brand" | "orientacao";
 
 export type ClickMidiaLeadForm = {
@@ -17,6 +19,28 @@ type Attribution = {
   landingPath?: string;
   referrer?: string;
 };
+
+const PARSE_HEADERS = {
+  "Content-Type": "application/json",
+  "X-Parse-Application-Id": "0PKFlHbZLySk8of77C5uvrWLLbu7UjyvvXQKmm2d",
+  "X-Parse-Client-Key": "s14psdEgnm8cV9ki2c2sfbcrKXeJxuzkjzyaXd03",
+  "X-Parse-REST-API-Key": "s14psdEgnm8cV9ki2c2sfbcrKXeJxuzkjzyaXd03",
+} as const;
+
+const clickMidiaApi = axios.create({
+  headers: PARSE_HEADERS,
+  timeout: 20_000,
+});
+
+function apiBaseUrl() {
+  if (typeof window === "undefined") return "https://parseh3.clickparts.app/parse/functions";
+  const hostname = window.location.hostname.toLowerCase();
+  const homologacao =
+    hostname === "localhost" || hostname === "127.0.0.1" || hostname.startsWith("homolog.");
+  return homologacao
+    ? "https://parseh3.clickparts.app/parse/functions"
+    : "https://parse.clickparts.app/parse/functions";
+}
 
 export function somenteDigitos(valor = "") {
   return String(valor || "").replace(/\D/g, "");
@@ -118,27 +142,46 @@ function montarPayload(form: ClickMidiaLeadForm, ctaSource: string, abertoEm: nu
   };
 }
 
-export async function enviarLeadClickMidia(form: ClickMidiaLeadForm, ctaSource: string, abertoEm: number) {
-  let response: Response;
+export async function enviarLeadClickMidia(
+  form: ClickMidiaLeadForm,
+  ctaSource: string,
+  abertoEm: number,
+) {
   try {
-    response = await fetch("/api/click-midia-lead", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(montarPayload(form, ctaSource, abertoEm)),
-    });
-  } catch {
-    throw new Error("Não foi possível conectar ao atendimento. Verifique sua internet e tente novamente.");
+    const response = await clickMidiaApi.post(
+      `${apiBaseUrl()}/click-midia-lead-enviar`,
+      montarPayload(form, ctaSource, abertoEm),
+    );
+    const data = response.data as {
+      result?: { success?: boolean; message?: string };
+      success?: boolean;
+      message?: string;
+    };
+    const resultado = data?.result !== undefined ? data.result : data;
+    if (!resultado?.success) {
+      throw new Error(resultado?.message || "Não foi possível enviar seu interesse.");
+    }
+    return resultado;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const data = error.response?.data as
+        | {
+            error?: string;
+            result?: { message?: string };
+            message?: string;
+          }
+        | undefined;
+      throw new Error(
+        data?.error ||
+          data?.result?.message ||
+          data?.message ||
+          (error.code === "ECONNABORTED"
+            ? "O atendimento demorou para responder. Tente novamente."
+            : "Não foi possível conectar ao atendimento. Verifique sua internet e tente novamente."),
+      );
+    }
+    throw error instanceof Error
+      ? error
+      : new Error("Não foi possível enviar seu interesse. Tente novamente.");
   }
-
-  const data = await response.json().catch(() => ({})) as {
-    result?: { success?: boolean; message?: string };
-    error?: string;
-    message?: string;
-  };
-  const resultado = data.result ?? data;
-  if (!response.ok || !resultado?.success) {
-    throw new Error(data.error || resultado?.message || data.message || "Não foi possível enviar seu interesse. Tente novamente.");
-  }
-  return resultado;
 }
-

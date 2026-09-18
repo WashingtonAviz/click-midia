@@ -44,11 +44,12 @@ export const APIRoute = createAPIFileRoute("/api/click-midia-lead")({
       const body = await upstream.text();
       return new Response(body, {
         status: upstream.status,
-        headers: { "Content-Type": upstream.headers.get("Content-Type") || "application/json; charset=utf-8" },
+        headers: {
+          "Content-Type": upstream.headers.get("Content-Type") || "application/json; charset=utf-8",
+        },
       });
     } catch {
       return json({ error: "Não foi possível conectar ao atendimento. Tente novamente." }, 502);
     }
   },
 });
-
